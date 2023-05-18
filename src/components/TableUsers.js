@@ -29,7 +29,7 @@ const TableUsers = (props) => {
     }
 
     const handleUpdateUser = (user) => {
-        setListUsers([...listUsers, user]);
+        setListUsers([user, ...listUsers]);
     }
 
     return (

@@ -31,7 +31,9 @@ const ModalAddNew = () => {
                 theme: "light",
             });
             handleUpdateUser({first_name: name, last_name: job, id: res.id});
-        } else {toast.error('An Error...')};
+        } else {
+            toast.error('An Error...')
+        };
     }
     return (<>
         <Button className='add-new' variant="primary" onClick={handleShow}>
