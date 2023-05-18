@@ -23,7 +23,6 @@ const TableUsers = (props) => {
             setTotalPages(res.total_pages);
         }
     }
-    console.log(listUsers);
     const handlePageClick = (event) => {
         getUsers(+event.selected + 1);
     }
