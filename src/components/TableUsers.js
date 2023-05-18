@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { fetchAllUsers } from '../services/UserService';
 import ReactPaginate from 'react-paginate';
+import ModalAddNew from './ModalAddNew';
 
 const TableUsers = (props) => {
 
@@ -27,9 +28,18 @@ const TableUsers = (props) => {
         getUsers(+event.selected + 1);
     }
 
+    const handleUpdateUser = (user) => {
+        setListUsers([...listUsers, user]);
+    }
 
     return (
         <>
+            <div className="my-3 add-new">
+                <span><b>List Users:</b></span>
+                <ModalAddNew 
+                    handleUpdateUser={handleUpdateUser}
+                />
+            </div>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
