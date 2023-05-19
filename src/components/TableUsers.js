@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { fetchAllUsers } from '../services/UserService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from './ModalAddNew';
 
 const TableUsers = (props) => {
 
@@ -10,7 +9,6 @@ const TableUsers = (props) => {
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
     useEffect(() => {
         //call api
         //dry
@@ -28,18 +26,8 @@ const TableUsers = (props) => {
         getUsers(+event.selected + 1);
     }
 
-    const handleUpdateUser = (user) => {
-        setListUsers([user, ...listUsers]);
-    }
-
     return (
         <>
-            <div className="my-3 add-new">
-                <span><b>List Users:</b></span>
-                <ModalAddNew 
-                    handleUpdateUser={handleUpdateUser}
-                />
-            </div>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
@@ -47,6 +35,7 @@ const TableUsers = (props) => {
                         <th>Email</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,6 +47,10 @@ const TableUsers = (props) => {
                                     <td>{item.email}</td>
                                     <td>{item.first_name}</td>
                                     <td>{item.last_name}</td>
+                                    <td>
+                                        <button className='btn btn-warning mx-3'>Edit</button>
+                                        <button className='btn btn-danger mx-3'>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })
