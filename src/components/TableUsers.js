@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { fetchAllUsers } from '../services/UserService';
 import ReactPaginate from 'react-paginate';
-
+import ModalAddNew from './ModalAddNew';
 const TableUsers = (props) => {
+    const [isShowModal, setIsShowModal] = useState(false);
 
     const [listUsers, setListUsers] = useState([]);
     // eslint-disable-next-line
@@ -25,9 +26,18 @@ const TableUsers = (props) => {
     const handlePageClick = (event) => {
         getUsers(+event.selected + 1);
     }
-
+    const handleUpdateTable = (user) => {
+        setListUsers([user, ...listUsers]);
+    }
     return (
         <>
+            <div className="my-3 add-new">
+                <span><b>List Users:</b></span>
+                <button
+                    className='btn btn-info'
+                    onClick={() => setIsShowModal(true)}
+                >Add New</button>
+            </div>
             <Table striped bordered hover variant="dark">
                 <thead>
                     <tr>
@@ -75,6 +85,11 @@ const TableUsers = (props) => {
                 breakLinkClassName='page-link'
                 containerClassName='pagination'
                 activeClassName='active'
+            />
+            <ModalAddNew
+                show={isShowModal}
+                handleClose={() => setIsShowModal(false)}
+                handleUpdateTable={handleUpdateTable}
             />
         </>
     );
