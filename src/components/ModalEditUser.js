@@ -26,6 +26,8 @@ const ModelEditUser = (props) => {
                 progress: undefined,
                 theme: "light",
                 });
+        } else {
+            toast.error('Something went wrong!!!');
         }
     }
     useEffect(() => {

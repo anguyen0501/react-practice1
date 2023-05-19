@@ -44,12 +44,18 @@ const TableUsers = (props) => {
         cloneListUser[index].first_name = user.first_name;
         cloneListUser[index].last_name = user.last_name;
         setListUsers(cloneListUser);
-        console.log(listUsers, cloneListUser);
     }
 
     const handleDeleteUser = (user) => {
         setDataUserDelete(user);
         setIsShowModelDelete(true);
+    }
+
+    const handleDeleteUserFromModal = (user) => {
+        let cloneListUser = _.cloneDeep(listUsers);
+        let index = listUsers.findIndex(item => item.id === user.id);
+        cloneListUser.splice(index, 1);
+        setListUsers(cloneListUser);
     }
 
     useEffect(() => {
@@ -146,6 +152,7 @@ const TableUsers = (props) => {
                 show={isShowModelDelete}
                 handleClose={handleClose}
                 dataUserDelete={dataUserDelete}
+                handleDeleteUserFromModal={handleDeleteUserFromModal}
             />
         </>
     );
